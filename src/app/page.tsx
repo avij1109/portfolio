@@ -1,23 +1,20 @@
 'use client';
 
-import { Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 
-// Dynamically import Spline component for better compatibility
-const SplineComponent = dynamic(
-  () => import('@splinetool/react-spline').then((mod) => mod.default),
-  { 
-    ssr: false,
-    loading: () => (
-      <div className="flex items-center justify-center h-screen text-white">
-        <div className="text-center">
-          <div className="text-2xl mb-4">🚀</div>
-          <div>Loading 3D Scene...</div>
-        </div>
+// Import the Spline scene component
+const SplineScene = dynamic(() => import('../components/SplineScene'), {
+  ssr: false,
+  loading: () => (
+    <div className="flex items-center justify-center h-screen text-white">
+      <div className="text-center">
+        <div className="text-2xl mb-4">🚀</div>
+        <div>Loading 3D Scene...</div>
       </div>
-    )
-  }
-);
+    </div>
+  )
+});
 
 export default function Home() {
   const [showOverlay, setShowOverlay] = useState(true);
@@ -214,7 +211,7 @@ export default function Home() {
       <section id="hero" className="min-h-screen relative bg-black text-white">
         {/* Spline Background */}
         <div className="absolute inset-0 z-0">
-          <SplineComponent 
+          <SplineScene 
             scene="https://prod.spline.design/nwa7xQ2XoztDEbYD/scene.splinecode"
             style={{ width: '100%', height: '100vh' }}
           />
