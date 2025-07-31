@@ -89,7 +89,7 @@ export default function Home() {
     },
     {
       id: 5,
-      title: "Women's Safety Alert App",
+      title: "Women&apos;s Safety Alert App",
       description: "A React Native app with safety features including periodic check-ins, automatic distress alerts, SOS messages with live location, and push notifications.",
       tech: ["React Native", "JavaScript", "GPS Tracking", "Real-time Alerts"],
       liveUrl: "#",
@@ -375,7 +375,7 @@ export default function Home() {
             <div className="bg-white/5 backdrop-blur-sm p-6 rounded-lg border border-white/10">
               <h4 className="text-lg font-semibold text-purple-200 mb-2">🏆 Winner, Innovation 2025</h4>
               <p className="text-gray-300">
-                Developed a Women's Safety Alert app using React Native, featuring SOS alerts, live location sharing, 
+                Developed a Women&apos;s Safety Alert app using React Native, featuring SOS alerts, live location sharing, 
                 and automated check-ins for enhanced safety. Organized by the Department of Information Technology, BIT Durg.
               </p>
             </div>
@@ -445,10 +445,10 @@ export default function Home() {
         <div className="max-w-lg mx-auto px-6">
           {/* Contact Card */}
           <div className="bg-white rounded-2xl p-8 text-center text-black shadow-2xl">
-            <h2 className="text-3xl font-bold mb-4 text-gray-800">Let's Connect!</h2>
+            <h2 className="text-3xl font-bold mb-4 text-gray-800">Let&apos;s Connect!</h2>
             <p className="text-gray-600 mb-8 leading-relaxed">
-              I'm always excited to collaborate on new projects and connect with fellow developers. 
-              Let's build something amazing together!
+              I&apos;m always excited to collaborate on new projects and connect with fellow developers. 
+              Let&apos;s build something amazing together!
             </p>
             
             {/* Social Links */}
