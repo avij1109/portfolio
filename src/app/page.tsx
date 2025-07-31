@@ -41,10 +41,91 @@ export default function Home() {
       setShowOverlay(false);
     }, 2000);
 
+    // Cursor following animation for about section
+    const handleMouseMove = (e: MouseEvent) => {
+      const aboutSection = document.getElementById('about');
+      const cursorFollower = document.querySelector('.cursor-follower') as HTMLElement;
+      
+      if (aboutSection && cursorFollower) {
+        const rect = aboutSection.getBoundingClientRect();
+        const isInAboutSection = e.clientY >= rect.top && e.clientY <= rect.bottom;
+        
+        // Always update position
+        cursorFollower.style.left = e.clientX + 'px';
+        cursorFollower.style.top = e.clientY + 'px';
+        
+        if (isInAboutSection) {
+          cursorFollower.style.opacity = '0.8';
+          cursorFollower.style.transform = 'translate(-50%, -50%) scale(1)';
+          cursorFollower.style.display = 'block';
+        } else {
+          cursorFollower.style.opacity = '0';
+          cursorFollower.style.transform = 'translate(-50%, -50%) scale(0.5)';
+        }
+      }
+    };
+
+    // Add hover effects for interactive elements
+    const handleElementHover = (e: MouseEvent) => {
+      const cursorFollower = document.querySelector('.cursor-follower') as HTMLElement;
+      const butterflyImage = document.querySelector('.butterfly-image') as HTMLElement;
+      const target = e.target as HTMLElement;
+      
+      if (cursorFollower && butterflyImage && target.closest('#about')) {
+        if (target.closest('h2, h3, h4, p, li, button')) {
+          // Excited butterfly - bigger and faster wing flap
+          cursorFollower.style.transform = 'translate(-50%, -50%) scale(1.4) rotate(10deg)';
+          cursorFollower.style.opacity = '1';
+          cursorFollower.style.filter = 'drop-shadow(0 0 20px rgba(251, 191, 36, 0.8)) drop-shadow(0 0 35px rgba(245, 158, 11, 0.5))';
+          butterflyImage.style.animation = 'wing-flap-excited 0.3s ease-in-out infinite alternate';
+          
+          // Make sparkles more intense
+          const sparkles = document.querySelectorAll('.sparkle-dot');
+          sparkles.forEach((sparkle, index) => {
+            const sparkleEl = sparkle as HTMLElement;
+            sparkleEl.style.opacity = '1';
+            sparkleEl.style.animation = `sparkle-twinkle 0.${3 + index}s ease-in-out infinite alternate`;
+          });
+        } else {
+          // Normal butterfly
+          cursorFollower.style.transform = 'translate(-50%, -50%) scale(1) rotate(0deg)';
+          cursorFollower.style.opacity = '0.9';
+          cursorFollower.style.filter = 'drop-shadow(0 0 10px rgba(168, 85, 247, 0.6))';
+          butterflyImage.style.animation = 'wing-flap 0.8s ease-in-out infinite alternate';
+          
+          // Reset sparkles to gentle animation
+          const sparkles = document.querySelectorAll('.sparkle-dot');
+          sparkles.forEach(sparkle => {
+            const sparkleEl = sparkle as HTMLElement;
+            sparkleEl.style.animation = 'sparkle-gentle 2s ease-in-out infinite';
+          });
+        }
+      }
+    };
+
+    // Initialize cursor follower
+    const initCursorFollower = () => {
+      const cursorFollower = document.querySelector('.cursor-follower') as HTMLElement;
+      if (cursorFollower) {
+        cursorFollower.style.display = 'none';
+        cursorFollower.style.position = 'fixed';
+        cursorFollower.style.pointerEvents = 'none';
+        cursorFollower.style.zIndex = '9999';
+      }
+    };
+
+    // Wait for DOM to be ready
+    setTimeout(initCursorFollower, 100);
+    
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseover', handleElementHover);
+
     return () => {
       clearTimeout(timer);
       clearInterval(interval);
       clearTimeout(slideTimer);
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseover', handleElementHover);
     };
   }, []);
 
@@ -266,8 +347,83 @@ export default function Home() {
       </div>
 
       {/* About Section */}
-      <section id="about" className="min-h-screen bg-gradient-to-br from-purple-950 via-black to-black text-white py-24">
-        <div className="max-w-4xl mx-auto px-6">
+      <section id="about" className="min-h-screen relative bg-gradient-to-br from-purple-950 via-black to-black text-white py-24 overflow-hidden">
+                {/* Cursor Following Animation - Your Butterfly */}
+        <div 
+          className="cursor-follower fixed opacity-0 pointer-events-none transition-all duration-300 ease-out"
+          style={{ 
+            transform: 'translate(-50%, -50%)', 
+            zIndex: 9999,
+            filter: 'drop-shadow(0 0 10px rgba(168, 85, 247, 0.6))'
+          }}
+        >
+          <div className="relative cursor-container">
+            {/* Your downloaded butterfly cursor */}
+            <img 
+              src="/cursor.png" 
+              alt="Butterfly cursor"
+              className="butterfly-image"
+              style={{ 
+                width: '40px', 
+                height: 'auto',
+                imageRendering: 'pixelated', // For crisp pixel art cursors
+                animation: 'wing-flap 0.8s ease-in-out infinite alternate'
+              }}
+            />
+            
+            {/* Wing overlay animations */}
+            <div className="absolute inset-0 wing-effects">
+              {/* Subtle sparkle effects */}
+              <div className="sparkle-dot sparkle-1" style={{ 
+                position: 'absolute', 
+                top: '8px', 
+                left: '8px', 
+                width: '3px', 
+                height: '3px', 
+                background: '#fbbf24', 
+                borderRadius: '50%',
+                opacity: '0.7'
+              }}></div>
+              <div className="sparkle-dot sparkle-2" style={{ 
+                position: 'absolute', 
+                top: '12px', 
+                right: '8px', 
+                width: '2px', 
+                height: '2px', 
+                background: '#ec4899', 
+                borderRadius: '50%',
+                opacity: '0.6'
+              }}></div>
+              <div className="sparkle-dot sparkle-3" style={{ 
+                position: 'absolute', 
+                bottom: '10px', 
+                left: '12px', 
+                width: '2.5px', 
+                height: '2.5px', 
+                background: '#a855f7', 
+                borderRadius: '50%',
+                opacity: '0.8'
+              }}></div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Interactive Background Elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Animated Gradient Orbs */}
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full blur-3xl animate-pulse-slow"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full blur-3xl animate-pulse-slow-delayed"></div>
+          
+          {/* Floating Particles */}
+          <div className="absolute top-20 left-20 w-2 h-2 bg-purple-300 rounded-full animate-float opacity-60"></div>
+          <div className="absolute top-32 right-32 w-1 h-1 bg-pink-300 rounded-full animate-float-delayed opacity-40"></div>
+          <div className="absolute bottom-20 left-32 w-3 h-3 bg-blue-300 rounded-full animate-float-slow opacity-50"></div>
+          <div className="absolute bottom-32 right-20 w-1 h-1 bg-purple-200 rounded-full animate-float opacity-30"></div>
+          <div className="absolute top-1/2 left-1/3 w-2 h-2 bg-pink-400 rounded-full animate-float-delayed opacity-50"></div>
+          <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-purple-400 rounded-full animate-float-slow opacity-40"></div>
+        </div>
+
+        <div className="max-w-4xl mx-auto px-6 relative z-20">
           {/* Header */}
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-6xl font-bold mb-6">About Me</h2>
@@ -521,6 +677,51 @@ export default function Home() {
           40% { transform: translateY(-10px); }
           60% { transform: translateY(-5px); }
         }
+        @keyframes float {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        @keyframes float-delayed {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-15px) rotate(-180deg); }
+        }
+        @keyframes float-slow {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          50% { transform: translateY(-10px) rotate(90deg); }
+        }
+        @keyframes pulse-slow {
+          0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.1; }
+          50% { transform: scale(1.1) rotate(180deg); opacity: 0.2; }
+        }
+        @keyframes pulse-slow-delayed {
+          0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.1; }
+          50% { transform: scale(1.2) rotate(-180deg); opacity: 0.15; }
+        }
+        @keyframes wing-flap {
+          0% { transform: rotate(0deg) scale(1); }
+          25% { transform: rotate(3deg) scale(1.02); }
+          50% { transform: rotate(0deg) scale(1.05); }
+          75% { transform: rotate(-3deg) scale(1.02); }
+          100% { transform: rotate(0deg) scale(1); }
+        }
+        @keyframes wing-flap-excited {
+          0% { transform: rotate(0deg) scale(1); }
+          20% { transform: rotate(8deg) scale(1.1); }
+          40% { transform: rotate(-8deg) scale(1.05); }
+          60% { transform: rotate(5deg) scale(1.08); }
+          80% { transform: rotate(-5deg) scale(1.03); }
+          100% { transform: rotate(0deg) scale(1); }
+        }
+        @keyframes sparkle-gentle {
+          0% { transform: scale(0.8); opacity: 0.5; }
+          50% { transform: scale(1.2); opacity: 0.8; }
+          100% { transform: scale(0.8); opacity: 0.5; }
+        }
+        @keyframes sparkle-twinkle {
+          0% { transform: scale(1) rotate(0deg); opacity: 0.7; }
+          50% { transform: scale(1.4) rotate(180deg); opacity: 1; }
+          100% { transform: scale(1.1) rotate(360deg); opacity: 0.8; }
+        }
         
         .animate-fade-in {
           animation: fade-in 1s ease-out;
@@ -540,6 +741,32 @@ export default function Home() {
         .animate-bounce-slow {
           animation: bounce-slow 3s ease-in-out infinite;
         }
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
+        .animate-float-delayed {
+          animation: float-delayed 8s ease-in-out infinite;
+        }
+        .animate-float-slow {
+          animation: float-slow 10s ease-in-out infinite;
+        }
+        .animate-pulse-slow {
+          animation: pulse-slow 8s ease-in-out infinite;
+        }
+        .animate-pulse-slow-delayed {
+          animation: pulse-slow-delayed 10s ease-in-out infinite;
+        }
+        .animate-wing-flap {
+          animation: wing-flap 0.8s ease-in-out infinite alternate;
+        }
+        
+        /* Sparkle animations */
+        .sparkle-dot {
+          animation: sparkle-gentle 2s ease-in-out infinite;
+        }
+        .sparkle-1 { animation-delay: 0s; }
+        .sparkle-2 { animation-delay: 0.7s; }
+        .sparkle-3 { animation-delay: 1.4s; }
         
         .animation-delay-100 { animation-delay: 0.1s; }
         .animation-delay-200 { animation-delay: 0.2s; }
@@ -567,3 +794,4 @@ export default function Home() {
     </main>
   );
 }
+
