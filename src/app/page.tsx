@@ -142,7 +142,7 @@ export default function Home() {
       description: "Created a Java-based application to predict blood pressure trends from PPG signals using machine learning with Random Forest classifier achieving high accuracy.",
       tech: ["Java", "Machine Learning", "Random Forest", "PyWavelets"],
       liveUrl: "#",
-      githubUrl: "#",
+      githubUrl: "https://github.com/avij1109/ppg",
     },
     {
       id: 2,
@@ -150,7 +150,7 @@ export default function Home() {
       description: "Built a cross-platform music recommendation app in React Native using Flask-based ML backend with k-Nearest Neighbors algorithm and Spotify integration.",
       tech: ["React Native", "Flask", "Machine Learning", "Spotify API", "k-NN"],
       liveUrl: "#",
-      githubUrl: "#",
+      githubUrl: "https://github.com/avij1109/music",
     },
     {
       id: 3,
@@ -170,7 +170,7 @@ export default function Home() {
     },
     {
       id: 5,
-      title: "Women&apos;s Safety Alert App",
+      title: "Women's Safety Alert App",
       description: "A React Native app with safety features including periodic check-ins, automatic distress alerts, SOS messages with live location, and push notifications.",
       tech: ["React Native", "JavaScript", "GPS Tracking", "Real-time Alerts"],
       liveUrl: "#",
@@ -345,10 +345,24 @@ export default function Home() {
           <div className="mt-4 w-16 h-1 bg-purple-400 mx-auto animate-pulse"></div>
         </div>
       </div>
-
       {/* About Section */}
       <section id="about" className="min-h-screen relative bg-gradient-to-br from-purple-950 via-black to-black text-white py-24 overflow-hidden">
-                {/* Cursor Following Animation - Your Butterfly */}
+        {/* Blackish Overlay for Top Left and Middle */}
+        <div className="absolute inset-0 z-10">
+          {/* Top Left Blackish Overlay - Much darker and larger */}
+          <div className="absolute top-0 left-0 w-3/4 h-3/4 bg-black/80 backdrop-blur-lg rounded-br-3xl"></div>
+          {/* Middle Blackish Overlay - Much darker and larger */}
+          <div className="absolute top-1/6 left-1/4 w-2/3 h-2/3 bg-black/75 backdrop-blur-lg rounded-xl"></div>
+          {/* Additional gradient overlays for better blending */}
+          <div className="absolute top-0 left-0 w-full h-3/4 bg-gradient-to-b from-black/70 via-black/40 to-transparent"></div>
+          <div className="absolute top-0 left-0 w-4/5 h-full bg-gradient-to-r from-black/80 via-black/60 to-transparent"></div>
+          {/* Corner accent - much darker */}
+          <div className="absolute top-0 left-0 w-48 h-48 bg-gradient-to-br from-black/90 to-transparent rounded-br-3xl"></div>
+          {/* Additional dark overlay for the entire top area */}
+          <div className="absolute top-0 left-0 w-full h-1/2 bg-black/60"></div>
+        </div>
+        
+        {/* Cursor Following Animation - Your Butterfly */}
         <div 
           className="cursor-follower fixed opacity-0 pointer-events-none transition-all duration-300 ease-out"
           style={{ 
@@ -408,19 +422,28 @@ export default function Home() {
           </div>
         </div>
         
-        {/* Interactive Background Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          {/* Animated Gradient Orbs */}
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full blur-3xl animate-pulse-slow"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full blur-3xl animate-pulse-slow-delayed"></div>
+        {/* Interactive Background Elements with Enhanced Animations */}
+        <div className="absolute inset-0 overflow-hidden z-5">
+          {/* Animated Gradient Orbs with better blending */}
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-purple-500/8 to-pink-500/8 rounded-full blur-3xl animate-pulse-slow"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-blue-500/8 to-purple-500/8 rounded-full blur-3xl animate-pulse-slow-delayed"></div>
           
-          {/* Floating Particles */}
+          {/* Additional animated elements for better blending */}
+          <div className="absolute top-1/3 left-1/4 w-64 h-64 bg-gradient-to-br from-purple-600/5 to-transparent rounded-full blur-2xl animate-pulse-slow"></div>
+          <div className="absolute bottom-1/3 right-1/4 w-72 h-72 bg-gradient-to-bl from-pink-600/5 to-transparent rounded-full blur-2xl animate-pulse-slow-delayed"></div>
+          
+          {/* Floating Particles with enhanced visibility */}
           <div className="absolute top-20 left-20 w-2 h-2 bg-purple-300 rounded-full animate-float opacity-60"></div>
-          <div className="absolute top-32 right-32 w-1 h-1 bg-pink-300 rounded-full animate-float-delayed opacity-40"></div>
-          <div className="absolute bottom-20 left-32 w-3 h-3 bg-blue-300 rounded-full animate-float-slow opacity-50"></div>
-          <div className="absolute bottom-32 right-20 w-1 h-1 bg-purple-200 rounded-full animate-float opacity-30"></div>
+          <div className="absolute top-32 right-32 w-1 h-1 bg-pink-300 rounded-full animate-float-delayed opacity-50"></div>
+          <div className="absolute bottom-20 left-32 w-3 h-3 bg-blue-300 rounded-full animate-float-slow opacity-55"></div>
+          <div className="absolute bottom-32 right-20 w-1 h-1 bg-purple-200 rounded-full animate-float opacity-45"></div>
           <div className="absolute top-1/2 left-1/3 w-2 h-2 bg-pink-400 rounded-full animate-float-delayed opacity-50"></div>
           <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-purple-400 rounded-full animate-float-slow opacity-40"></div>
+          
+          {/* Additional subtle particles for better blending */}
+          <div className="absolute top-1/4 left-1/2 w-1 h-1 bg-purple-300 rounded-full animate-float-slow opacity-35"></div>
+          <div className="absolute bottom-1/4 left-1/4 w-1 h-1 bg-pink-300 rounded-full animate-float-delayed opacity-40"></div>
+          <div className="absolute top-2/3 right-1/3 w-1 h-1 bg-blue-300 rounded-full animate-float opacity-30"></div>
         </div>
 
         <div className="max-w-4xl mx-auto px-6 relative z-20">
@@ -525,17 +548,7 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Achievement */}
-          <div>
-            <h3 className="text-2xl font-bold mb-6 text-purple-300">Achievements</h3>
-            <div className="bg-white/5 backdrop-blur-sm p-6 rounded-lg border border-white/10">
-              <h4 className="text-lg font-semibold text-purple-200 mb-2">🏆 Winner, Innovation 2025</h4>
-              <p className="text-gray-300">
-                Developed a Women&apos;s Safety Alert app using React Native, featuring SOS alerts, live location sharing, 
-                and automated check-ins for enhanced safety. Organized by the Department of Information Technology, BIT Durg.
-              </p>
-            </div>
-          </div>
+          
         </div>
       </section>
 
