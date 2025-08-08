@@ -634,7 +634,7 @@ export default function Home() {
               </a>
               
               <a 
-                href="https://www.linkedin.com/in/avinash-jain-7689b5290/" 
+                href="https://www.linkedin.com/in/avinashjain-dev/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-12 h-12 bg-gray-100 hover:bg-purple-100 rounded-full flex items-center justify-center transition-colors group"
