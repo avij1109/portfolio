@@ -138,58 +138,50 @@ export default function Home() {
   const projects = [
     {
       id: 1,
+      title: "VoxaHub — AI Voice Agent Platform",
+      description: "Production-ready AI call automation system with LLM-powered agents for parallel outbound calls, featuring real-time STT/TTS, agent workflows for appointment booking and lead qualification, call analytics, and user billing architecture.",
+      tech: ["FastAPI", "Python", "LLM Agents", "Deepgram", "ElevenLabs", "WebSockets"],
+      liveUrl: "#",
+      githubUrl: "#",
+    },
+    {
+      id: 2,
+      title: "VeriAI — AI Misinformation Detection",
+      description: "Full-stack agentic system for misinformation detection with autonomous reasoning, crawler agents, and blockchain-based trust scoring. Features LLM-driven verification with chain-of-thought reasoning, evidence retrieval, and Avalanche blockchain integration.",
+      tech: ["React", "FastAPI", "LLM Agents", "RAG", "Blockchain", "Avalanche"],
+      liveUrl: "#",
+      githubUrl: "#",
+    },
+    {
+      id: 3,
       title: "Hypertension Prediction using PPG Signals",
-      description: "Created a Java-based application to predict blood pressure trends from PPG signals using machine learning with Random Forest classifier achieving high accuracy.",
+      description: "Java-based application predicting blood pressure trends from PPG signals using machine learning. Extracts time and frequency-domain features with wavelet transforms and Random Forest classifier.",
       tech: ["Java", "Machine Learning", "Random Forest", "PyWavelets"],
       liveUrl: "#",
       githubUrl: "https://github.com/avij1109/ppg",
     },
     {
-      id: 2,
+      id: 4,
       title: "ML-Based Music Recommender System",
-      description: "Built a cross-platform music recommendation app in React Native using Flask-based ML backend with k-Nearest Neighbors algorithm and Spotify integration.",
-      tech: ["React Native", "Flask", "Machine Learning", "Spotify API", "k-NN"],
+      description: "Cross-platform music recommendation app in React Native using Flask ML backend with k-NN similarity algorithm and Spotify OAuth integration for personalized recommendations.",
+      tech: ["React Native", "Flask", "k-NN", "Spotify API", "OAuth"],
       liveUrl: "#",
       githubUrl: "https://github.com/avij1109/music",
     },
     {
-      id: 3,
-      title: "Chatbot Web App",
-      description: "Built a chatbot that interacts with users using a predefined dataset for intelligent conversation and user assistance.",
-      tech: ["Python", "Natural Language Processing", "Web Development"],
-      liveUrl: "#",
-      githubUrl: "https://github.com/avij1109/chatbot",
-    },
-    {
-      id: 4,
-      title: "Todo Web App",
-      description: "A responsive web application using React and Vite to manage daily tasks efficiently, with features like task categorization and due date tracking.",
-      tech: ["React", "Vite", "JavaScript", "CSS"],
-      liveUrl: "#",
-      githubUrl: "https://github.com/avij1109/Todo",
-    },
-    {
       id: 5,
       title: "Women's Safety Alert App",
-      description: "A React Native app with safety features including periodic check-ins, automatic distress alerts, SOS messages with live location, and push notifications.",
-      tech: ["React Native", "JavaScript", "GPS Tracking", "Real-time Alerts"],
+      description: "React Native safety application with automated check-in timers, SOS alerts with live location sharing, emergency contact notifications, GPS tracking, and push notifications.",
+      tech: ["React Native", "JavaScript", "GPS Tracking", "Push Notifications"],
       liveUrl: "#",
       githubUrl: "#",
-    },
-    {
-      id: 6,
-      title: "Face Detector",
-      description: "Implemented a face detection application using Python and OpenCV, exploring basic machine learning concepts for real-time face recognition.",
-      tech: ["Python", "OpenCV", "Machine Learning"],
-      liveUrl: "#",
-      githubUrl: "https://github.com/avij1109/face-detector",
     }
   ];
 
   return (
     <main className="relative">
       {/* Navigation Bar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-sm border-b border-white/10">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-white/5">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             {/* Logo/Name */}
@@ -289,7 +281,7 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section id="hero" className="min-h-screen relative bg-black text-white">
+      <section id="hero" className="min-h-screen relative bg-gradient-to-b from-black via-black to-purple-950/40 text-white">
         {/* Spline Background */}
         <div className="absolute inset-0 z-0">
           <SplineScene 
@@ -335,7 +327,7 @@ export default function Home() {
       </section>
 
       {/* Slide Right Overlay */}
-      <div className={`fixed inset-0 z-50 bg-gradient-to-br from-purple-900/80 via-black/90 to-black/90 backdrop-blur-sm flex items-center justify-center transition-transform duration-1000 ease-in-out ${
+      <div className={`fixed inset-0 z-50 bg-gradient-to-br from-black via-black to-purple-950/30 backdrop-blur-sm flex items-center justify-center transition-transform duration-1000 ease-in-out ${
         showOverlay ? 'translate-x-0' : 'translate-x-full'
       }`}>
         <div className="text-center">
@@ -346,20 +338,14 @@ export default function Home() {
         </div>
       </div>
       {/* About Section */}
-      <section id="about" className="min-h-screen relative bg-gradient-to-br from-purple-950 via-black to-black text-white py-24 overflow-hidden">
-        {/* Blackish Overlay for Top Left and Middle */}
-        <div className="absolute inset-0 z-10">
-          {/* Top Left Blackish Overlay - Much darker and larger */}
-          <div className="absolute top-0 left-0 w-3/4 h-3/4 bg-black/80 backdrop-blur-lg rounded-br-3xl"></div>
-          {/* Middle Blackish Overlay - Much darker and larger */}
-          <div className="absolute top-1/6 left-1/4 w-2/3 h-2/3 bg-black/75 backdrop-blur-lg rounded-xl"></div>
-          {/* Additional gradient overlays for better blending */}
-          <div className="absolute top-0 left-0 w-full h-3/4 bg-gradient-to-b from-black/70 via-black/40 to-transparent"></div>
-          <div className="absolute top-0 left-0 w-4/5 h-full bg-gradient-to-r from-black/80 via-black/60 to-transparent"></div>
-          {/* Corner accent - much darker */}
-          <div className="absolute top-0 left-0 w-48 h-48 bg-gradient-to-br from-black/90 to-transparent rounded-br-3xl"></div>
-          {/* Additional dark overlay for the entire top area */}
-          <div className="absolute top-0 left-0 w-full h-1/2 bg-black/60"></div>
+      <section id="about" className="min-h-screen relative bg-gradient-to-br from-purple-950/30 via-black to-black text-white py-24 overflow-hidden">
+        {/* Gradient overlay with more visibility */}
+        <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-transparent to-black z-0"></div>
+        
+        {/* Mesh gradient effect */}
+        <div className="absolute inset-0 opacity-30 z-0">
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-purple-600/10 via-transparent to-transparent"></div>
+          <div className="absolute bottom-0 right-0 w-2/3 h-2/3 bg-gradient-to-tl from-purple-500/10 via-transparent to-transparent"></div>
         </div>
         
         {/* Cursor Following Animation - Your Butterfly */}
@@ -422,28 +408,21 @@ export default function Home() {
           </div>
         </div>
         
-        {/* Interactive Background Elements with Enhanced Animations */}
+        {/* Interactive Background Elements - Enhanced */}
         <div className="absolute inset-0 overflow-hidden z-5">
-          {/* Animated Gradient Orbs with better blending */}
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-purple-500/8 to-pink-500/8 rounded-full blur-3xl animate-pulse-slow"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-blue-500/8 to-purple-500/8 rounded-full blur-3xl animate-pulse-slow-delayed"></div>
+          {/* More visible gradient orbs */}
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-purple-500/15 to-pink-500/15 rounded-full blur-3xl animate-pulse-slow"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-purple-500/12 to-blue-500/12 rounded-full blur-3xl animate-pulse-slow-delayed"></div>
           
-          {/* Additional animated elements for better blending */}
-          <div className="absolute top-1/3 left-1/4 w-64 h-64 bg-gradient-to-br from-purple-600/5 to-transparent rounded-full blur-2xl animate-pulse-slow"></div>
-          <div className="absolute bottom-1/3 right-1/4 w-72 h-72 bg-gradient-to-bl from-pink-600/5 to-transparent rounded-full blur-2xl animate-pulse-slow-delayed"></div>
+          {/* Additional accent orbs */}
+          <div className="absolute top-1/3 right-1/3 w-64 h-64 bg-purple-600/8 rounded-full blur-2xl animate-pulse-slow"></div>
           
-          {/* Floating Particles with enhanced visibility */}
-          <div className="absolute top-20 left-20 w-2 h-2 bg-purple-300 rounded-full animate-float opacity-60"></div>
-          <div className="absolute top-32 right-32 w-1 h-1 bg-pink-300 rounded-full animate-float-delayed opacity-50"></div>
-          <div className="absolute bottom-20 left-32 w-3 h-3 bg-blue-300 rounded-full animate-float-slow opacity-55"></div>
-          <div className="absolute bottom-32 right-20 w-1 h-1 bg-purple-200 rounded-full animate-float opacity-45"></div>
-          <div className="absolute top-1/2 left-1/3 w-2 h-2 bg-pink-400 rounded-full animate-float-delayed opacity-50"></div>
-          <div className="absolute top-1/3 right-1/3 w-1 h-1 bg-purple-400 rounded-full animate-float-slow opacity-40"></div>
-          
-          {/* Additional subtle particles for better blending */}
-          <div className="absolute top-1/4 left-1/2 w-1 h-1 bg-purple-300 rounded-full animate-float-slow opacity-35"></div>
-          <div className="absolute bottom-1/4 left-1/4 w-1 h-1 bg-pink-300 rounded-full animate-float-delayed opacity-40"></div>
-          <div className="absolute top-2/3 right-1/3 w-1 h-1 bg-blue-300 rounded-full animate-float opacity-30"></div>
+          {/* Floating particles with more presence */}
+          <div className="absolute top-20 left-20 w-2 h-2 bg-purple-400 rounded-full animate-float opacity-40"></div>
+          <div className="absolute top-32 right-32 w-1.5 h-1.5 bg-pink-300 rounded-full animate-float-delayed opacity-35"></div>
+          <div className="absolute bottom-20 left-32 w-2 h-2 bg-purple-400 rounded-full animate-float-slow opacity-40"></div>
+          <div className="absolute bottom-32 right-20 w-1.5 h-1.5 bg-purple-300 rounded-full animate-float opacity-35"></div>
+          <div className="absolute top-1/2 left-1/3 w-1.5 h-1.5 bg-pink-400 rounded-full animate-float-delayed opacity-30"></div>
         </div>
 
         <div className="max-w-4xl mx-auto px-6 relative z-20">
@@ -451,7 +430,7 @@ export default function Home() {
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-6xl font-bold mb-6">About Me</h2>
             <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-              Passionate frontend developer creating beautiful, interactive web experiences with modern technologies.
+              Full-stack developer and ML enthusiast building AI-powered applications with React, FastAPI, and LLM agents.
             </p>
           </div>
 
@@ -461,12 +440,10 @@ export default function Home() {
             <div>
               <h3 className="text-2xl font-bold mb-6 text-purple-300">Who I Am</h3>
               <p className="text-gray-300 mb-4">
-                Tech enthusiast with a strong foundation in Python, JavaScript, and web development. 
-                Passionate about exploring diverse technologies, from mobile app development to machine learning.
+                Full-stack developer and ML enthusiast experienced in building AI-powered applications using React, React Native, FastAPI, and Python.
               </p>
               <p className="text-gray-300">
-                Currently working on real-world projects involving full-stack development, React Native apps, 
-                and machine learning model integration.
+                Developed systems involving LLM agents, blockchain trust scoring, and machine learning models for real-world applications. Interested in AI/ML and software engineering.
               </p>
             </div>
 
@@ -474,25 +451,30 @@ export default function Home() {
             <div>
               <h3 className="text-2xl font-bold mb-6 text-purple-300">Technical Skills</h3>
               <div className="grid grid-cols-1 gap-4">
-                <div className="bg-white/5 backdrop-blur-sm p-4 rounded-lg border border-white/10">
-                  <h4 className="font-semibold mb-2 text-purple-200">Programming Languages</h4>
+                <div className="bg-white/5 backdrop-blur-sm p-4 rounded-lg border border-white/10 hover:border-purple-500/30 hover:bg-white/10 transition-all duration-300">
+                  <h4 className="font-semibold mb-2 text-purple-200">Languages & Frameworks</h4>
                   <ul className="text-sm text-gray-300 space-y-1">
-                    <li>JavaScript (ES6, React, Next.js, Vite)</li>
-                    <li>TypeScript</li>
-                    <li>Java</li>
-                    <li>React Native</li>
-                    <li>Python (ML, OpenCV, PyWavelets)</li>
-                    <li>Node.js and Express.js</li>
+                    <li>JavaScript, TypeScript, Python, Java</li>
+                    <li>React, Next.js, React Native</li>
+                    <li>FastAPI, Flask, Node.js, Express.js</li>
                   </ul>
                 </div>
                 
-                <div className="bg-white/5 backdrop-blur-sm p-4 rounded-lg border border-white/10">
+                <div className="bg-white/5 backdrop-blur-sm p-4 rounded-lg border border-white/10 hover:border-purple-500/30 hover:bg-white/10 transition-all duration-300">
+                  <h4 className="font-semibold mb-2 text-purple-200">AI/ML & Backend</h4>
+                  <ul className="text-sm text-gray-300 space-y-1">
+                    <li>LLM Agents, Prompt Engineering, RAG</li>
+                    <li>Scikit-learn, PyWavelets, OpenCV</li>
+                    <li>REST APIs, WebSockets, Task Queues</li>
+                    <li>Blockchain (Avalanche, Smart Contracts)</li>
+                  </ul>
+                </div>
+                
+                <div className="bg-white/5 backdrop-blur-sm p-4 rounded-lg border border-white/10 hover:border-purple-500/30 hover:bg-white/10 transition-all duration-300">
                   <h4 className="font-semibold mb-2 text-purple-200">Databases & Tools</h4>
                   <ul className="text-sm text-gray-300 space-y-1">
-                    <li>MongoDB</li>
-                    <li>FastAPI, Flask</li>
-                    <li>HTML, CSS / SCSS</li>
-                    <li>Git / GitHub</li>
+                    <li>MongoDB, Supabase, Firebase</li>
+                    <li>Git, Docker, Postman, Linux</li>
                   </ul>
                 </div>
               </div>
@@ -512,7 +494,11 @@ export default function Home() {
       </section>
 
       {/* Experience Section */}
-      <section id="experience" className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-purple-900 text-white py-24">
+      <section id="experience" className="min-h-screen relative bg-gradient-to-b from-black via-purple-950/20 to-black text-white py-24">
+        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-purple-900/10 to-transparent z-0"></div>
+        
+        {/* Accent elements */}
+        <div className="absolute top-1/3 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
         <div className="max-w-4xl mx-auto px-6">
           {/* Header */}
           <div className="text-center mb-16">
@@ -528,8 +514,8 @@ export default function Home() {
             <div className="bg-white/5 backdrop-blur-sm p-6 rounded-lg border border-white/10">
               <div className="flex justify-between items-start mb-4">
                 <div>
-                  <h4 className="text-xl font-semibold text-white">B.Tech, BIT Durg</h4>
-                  <p className="text-purple-200">Pursuing Bachelor of Technology</p>
+                  <h4 className="text-xl font-semibold text-white">B.Tech, Bhilai Institute of Technology, Durg</h4>
+                  <p className="text-purple-200">Bachelor of Technology</p>
                 </div>
                 <span className="text-sm text-gray-400">Sep 2023 - Jul 2027</span>
               </div>
@@ -539,11 +525,40 @@ export default function Home() {
           {/* Experience */}
           <div className="mb-12">
             <h3 className="text-2xl font-bold mb-6 text-purple-300">Experience</h3>
+            
+            {/* ML Training */}
+            <div className="bg-white/5 backdrop-blur-sm p-6 rounded-lg border border-white/10 mb-4">
+              <div className="flex justify-between items-start mb-3">
+                <div>
+                  <h4 className="text-xl font-semibold text-white">Machine Learning Vocational Trainee</h4>
+                  <p className="text-purple-200">IIIT Naya Raipur</p>
+                </div>
+                <span className="text-sm text-gray-400">2026</span>
+              </div>
+              <ul className="text-gray-300 space-y-2 list-disc list-inside">
+                <li>Completed vocational training in Machine Learning at the International Institute of Information Technology, Naya Raipur</li>
+                <li>Implemented classification and regression models using Python and Scikit-learn</li>
+                <li>Applied feature engineering, model training, and evaluation on real datasets</li>
+              </ul>
+            </div>
+
+            {/* Development Experience */}
             <div className="bg-white/5 backdrop-blur-sm p-6 rounded-lg border border-white/10">
-              <h4 className="text-xl font-semibold text-white mb-2">Full Stack Development, App Development, and Machine Learning</h4>
-              <p className="text-gray-300 mb-4">
-                Gained hands-on experience in full-stack projects, mobile app development with React Native, and 
-                machine learning model integration through real-world applications and hackathons.
+              <h4 className="text-xl font-semibold text-white mb-3">Full Stack Development, App Development, and Machine Learning</h4>
+              <ul className="text-gray-300 space-y-2 list-disc list-inside">
+                <li>Built full-stack applications using React, React Native, FastAPI, and Node.js</li>
+                <li>Integrated machine learning models and APIs into production-ready applications</li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Achievements */}
+          <div className="mb-12">
+            <h3 className="text-2xl font-bold mb-6 text-purple-300">Achievements</h3>
+            <div className="bg-white/5 backdrop-blur-sm p-6 rounded-lg border border-white/10">
+              <h4 className="text-xl font-semibold text-white mb-2">Winner, Innovathon 2025</h4>
+              <p className="text-gray-300">
+                Built a Women&apos;s Safety Alert App with SOS alerts, live location sharing, and automated check-ins
               </p>
             </div>
           </div>
@@ -553,8 +568,12 @@ export default function Home() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="min-h-screen bg-gradient-to-br from-purple-900 via-black to-black text-white py-24">
-        <div className="max-w-7xl mx-auto px-6">
+      <section id="projects" className="min-h-screen relative bg-gradient-to-b from-black via-purple-950/20 to-black text-white py-24">
+        <div className="absolute inset-0 bg-gradient-to-br from-transparent via-purple-900/10 to-transparent z-0"></div>
+        
+        {/* Accent elements */}
+        <div className="absolute top-1/4 left-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
           {/* Header */}
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-6xl font-bold mb-6">My Projects</h2>
@@ -566,14 +585,7 @@ export default function Home() {
           {/* Projects Grid */}
           <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6 mb-16">
             {projects.map((project) => (
-              <div key={project.id} className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 overflow-hidden hover:transform hover:scale-105 transition-all duration-300">
-                {/* Project Image */}
-                <div className="aspect-video bg-gradient-to-br from-purple-500/20 to-pink-500/20 relative">
-                  <div className="absolute inset-0 flex items-center justify-center text-gray-400">
-                    Project Screenshot
-                  </div>
-                </div>
-                
+              <div key={project.id} className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 overflow-hidden hover:transform hover:scale-105 hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300">
                 {/* Project Content */}
                 <div className="p-6">
                   <h3 className="text-xl font-bold mb-3 text-white">{project.title}</h3>
@@ -589,11 +601,13 @@ export default function Home() {
                   </div>
                   
                   {/* Links */}
-                  <div className="flex justify-center">
-                    <a href={project.githubUrl} className="px-6 py-2 border border-purple-600 text-purple-300 hover:bg-purple-600 hover:text-white text-center rounded-lg transition-colors text-sm">
-                      GitHub
-                    </a>
-                  </div>
+                  {project.githubUrl !== "#" && (
+                    <div className="flex justify-center">
+                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="px-6 py-2 border border-purple-600 text-purple-300 hover:bg-purple-600 hover:text-white text-center rounded-lg transition-colors text-sm">
+                        View on GitHub
+                      </a>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
@@ -610,8 +624,12 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="min-h-screen bg-gradient-to-br from-purple-950 via-black to-black text-white py-24 flex items-center justify-center">
-        <div className="max-w-lg mx-auto px-6">
+      <section id="contact" className="min-h-screen relative bg-gradient-to-t from-purple-950/30 via-black to-black text-white py-24 flex items-center justify-center">
+        <div className="absolute inset-0 bg-gradient-to-tr from-purple-900/15 via-transparent to-transparent z-0"></div>
+        
+        {/* Accent glow */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl"></div>
+        <div className="max-w-lg mx-auto px-6 relative z-10">
           {/* Contact Card */}
           <div className="bg-white rounded-2xl p-8 text-center text-black shadow-2xl">
             <h2 className="text-3xl font-bold mb-4 text-gray-800">Let&apos;s Connect!</h2>
