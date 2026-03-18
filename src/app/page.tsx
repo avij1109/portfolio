@@ -21,6 +21,9 @@ export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
+    const cursorFollower = document.querySelector('.cursor-follower') as HTMLElement | null;
+    const aboutSection = document.getElementById('about');
+
     // Additional JavaScript to hide watermark after component loads
     const hideWatermark = () => {
       const watermarks = document.querySelectorAll('[class*="watermark"], [class*="logo"], [id*="spline"], [class*="spline"]');
@@ -34,83 +37,84 @@ export default function Home() {
     };
 
     const timer = setTimeout(hideWatermark, 2000);
-    const interval = setInterval(hideWatermark, 1000);
 
     // After 2 seconds, start the slide-right animation
     const slideTimer = setTimeout(() => {
       setShowOverlay(false);
     }, 2000);
 
+    let rafId: number | null = null;
+    let mouseX = 0;
+    let mouseY = 0;
+
+    const updateCursorTransform = () => {
+      if (!cursorFollower) {
+        rafId = null;
+        return;
+      }
+
+      const scale = cursorFollower.dataset.scale ?? '1';
+      const rotate = cursorFollower.dataset.rotate ?? '0';
+
+      cursorFollower.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0) translate(-50%, -50%) scale(${scale}) rotate(${rotate}deg)`;
+      rafId = null;
+    };
+
+    let isInAbout = false;
+
+    const handleScroll = () => {
+      if (!aboutSection) return;
+      const rect = aboutSection.getBoundingClientRect();
+      isInAbout = rect.top < window.innerHeight && rect.bottom > 0;
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+
     // Cursor following animation for about section
     const handleMouseMove = (e: MouseEvent) => {
-      const aboutSection = document.getElementById('about');
-      const cursorFollower = document.querySelector('.cursor-follower') as HTMLElement;
-      
-      if (aboutSection && cursorFollower) {
-        const rect = aboutSection.getBoundingClientRect();
-        const isInAboutSection = e.clientY >= rect.top && e.clientY <= rect.bottom;
-        
-        // Always update position
-        cursorFollower.style.left = e.clientX + 'px';
-        cursorFollower.style.top = e.clientY + 'px';
-        
-        if (isInAboutSection) {
-          cursorFollower.style.opacity = '0.8';
-          cursorFollower.style.transform = 'translate(-50%, -50%) scale(1)';
-          cursorFollower.style.display = 'block';
-        } else {
-          cursorFollower.style.opacity = '0';
-          cursorFollower.style.transform = 'translate(-50%, -50%) scale(0.5)';
-        }
+      if (!cursorFollower) return;
+
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      if (rafId === null) {
+        rafId = requestAnimationFrame(updateCursorTransform);
+      }
+
+      if (isInAbout) {
+        cursorFollower.style.opacity = '0.8';
+        cursorFollower.style.display = 'block';
+      } else {
+        cursorFollower.style.opacity = '0';
       }
     };
 
     // Add hover effects for interactive elements
     const handleElementHover = (e: MouseEvent) => {
-      const cursorFollower = document.querySelector('.cursor-follower') as HTMLElement;
-      const butterflyImage = document.querySelector('.butterfly-image') as HTMLElement;
       const target = e.target as HTMLElement;
       
-      if (cursorFollower && butterflyImage && target.closest('#about')) {
+      if (cursorFollower && target.closest('#about')) {
         if (target.closest('h2, h3, h4, p, li, button')) {
-          // Excited butterfly - bigger and faster wing flap
-          cursorFollower.style.transform = 'translate(-50%, -50%) scale(1.4) rotate(10deg)';
+          cursorFollower.dataset.scale = '1.4';
+          cursorFollower.dataset.rotate = '10';
           cursorFollower.style.opacity = '1';
-          cursorFollower.style.filter = 'drop-shadow(0 0 20px rgba(251, 191, 36, 0.8)) drop-shadow(0 0 35px rgba(245, 158, 11, 0.5))';
-          butterflyImage.style.animation = 'wing-flap-excited 0.3s ease-in-out infinite alternate';
-          
-          // Make sparkles more intense
-          const sparkles = document.querySelectorAll('.sparkle-dot');
-          sparkles.forEach((sparkle, index) => {
-            const sparkleEl = sparkle as HTMLElement;
-            sparkleEl.style.opacity = '1';
-            sparkleEl.style.animation = `sparkle-twinkle 0.${3 + index}s ease-in-out infinite alternate`;
-          });
         } else {
-          // Normal butterfly
-          cursorFollower.style.transform = 'translate(-50%, -50%) scale(1) rotate(0deg)';
-          cursorFollower.style.opacity = '0.9';
-          cursorFollower.style.filter = 'drop-shadow(0 0 10px rgba(168, 85, 247, 0.6))';
-          butterflyImage.style.animation = 'wing-flap 0.8s ease-in-out infinite alternate';
-          
-          // Reset sparkles to gentle animation
-          const sparkles = document.querySelectorAll('.sparkle-dot');
-          sparkles.forEach(sparkle => {
-            const sparkleEl = sparkle as HTMLElement;
-            sparkleEl.style.animation = 'sparkle-gentle 2s ease-in-out infinite';
-          });
+          cursorFollower.dataset.scale = '1';
+          cursorFollower.dataset.rotate = '0';
         }
       }
     };
 
     // Initialize cursor follower
     const initCursorFollower = () => {
-      const cursorFollower = document.querySelector('.cursor-follower') as HTMLElement;
       if (cursorFollower) {
         cursorFollower.style.display = 'none';
         cursorFollower.style.position = 'fixed';
         cursorFollower.style.pointerEvents = 'none';
         cursorFollower.style.zIndex = '9999';
+        cursorFollower.style.willChange = 'transform, opacity, filter';
+        cursorFollower.dataset.scale = '1';
+        cursorFollower.dataset.rotate = '0';
       }
     };
 
@@ -122,8 +126,11 @@ export default function Home() {
 
     return () => {
       clearTimeout(timer);
-      clearInterval(interval);
       clearTimeout(slideTimer);
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+      }
+      window.removeEventListener('scroll', handleScroll);
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseover', handleElementHover);
     };
@@ -789,6 +796,11 @@ export default function Home() {
         }
         .animate-wing-flap {
           animation: wing-flap 0.8s ease-in-out infinite alternate;
+        }
+
+        .cursor-follower {
+          will-change: transform, opacity;
+          transform: translate3d(0, 0, 0);
         }
         
         /* Sparkle animations */
